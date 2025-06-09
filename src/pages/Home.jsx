@@ -1,12 +1,21 @@
-import SectionSelector from "../components/SectionSelector"
-import ResumeForm from "../components/ResumeForm"
+import SectionSelector from "../components/SectionSelector";
+import ResumeForm from "../components/ResumeForm";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen p-6 bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
-      <h1 className="text-3xl font-bold mb-6">AI Resume Builder</h1>
+    <div>
+      <h1 className="text-3xl font-bold mb-4">AI Resume Builder</h1>
       <SectionSelector />
-      <ResumeForm/>
+      <ResumeForm />
+      <button
+        onClick={() => navigate("/preview")}
+        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
+      >
+        Go to Preview
+      </button>
     </div>
-  )
+  );
 }
