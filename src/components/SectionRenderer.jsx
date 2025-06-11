@@ -1,19 +1,47 @@
 function SectionRenderer({ section, data }) {
   if (!data) return null;
 
+  const sectionStyle = {
+    Profile: "text-red-400",
+    Skills: "text-red-400",
+    "Soft Skills": "text-red-400",
+    "Social Links": "text-red-400",
+    "Experience": "text-red-400",
+    Projects: "text-red-400",
+    Education: "text-red-400",
+    Achievements: "text-red-400",
+  };
+
+  const renderLinks = (links) => {
+    return Object.entries(links).map(([key, value]) => {
+      return value ? (
+        <p key={key}>
+          {key.charAt(0).toUpperCase() + key.slice(1)}:{" "}
+          <a href={value} className="text-blue-600 underline">
+            {value}
+          </a>
+        </p>
+      ) : null;
+    });
+  };
+
   switch (section) {
     case "Profile":
       return (
         <div className="mb-4">
-          <h2 className="text-xl font-semibold mb-1 border-b">Profile</h2>
-          <p>{data.summary}</p>
+          <h2 className={`text-xl font-light mb-1 border-b ${sectionStyle.Profile}`}>
+            Profile
+          </h2>
+          <p>{data.summery}</p>
         </div>
       );
 
-    case "Soft Skills":
+    case "Skills":
       return (
         <div className="mb-4">
-          <h2 className="text-xl font-semibold mb-1 border-b">Soft Skills</h2>
+          <h2 className={`text-xl font-light mb-1 border-b ${sectionStyle.Skills}`}>
+            Skills
+          </h2>
           <p>{data.list}</p>
         </div>
       );
@@ -21,7 +49,9 @@ function SectionRenderer({ section, data }) {
     case "Soft Skills":
       return (
         <div className="mb-4">
-          <h2 className="text-xl font-semibold mb-1 border-b">Soft Skills</h2>
+          <h2 className={`text-xl font-light mb-1 border-b ${sectionStyle["Soft Skills"]}`}>
+            Soft Skills
+          </h2>
           <p>{data.list}</p>
         </div>
       );
@@ -29,31 +59,10 @@ function SectionRenderer({ section, data }) {
     case "Social Links":
       return (
         <div className="mb-4">
-          <h2 className="text-xl font-semibold mb-1 border-b">Social Links</h2>
-          {data.linkedin && (
-            <p>
-              LinkedIn:{" "}
-              <a href={data.linkedin} className="text-blue-600 underline">
-                {data.linkedin}
-              </a>
-            </p>
-          )}
-          {data.github && (
-            <p>
-              GitHub:{" "}
-              <a href={data.github} className="text-blue-600 underline">
-                {data.github}
-              </a>
-            </p>
-          )}
-          {data.portfolio && (
-            <p>
-              Portfolio:{" "}
-              <a href={data.portfolio} className="text-blue-600 underline">
-                {data.portfolio}
-              </a>
-            </p>
-          )}
+          <h2 className={`text-xl font-light mb-1 border-b ${sectionStyle["Social Links"]}`}>
+            Social Links
+          </h2>
+          {renderLinks(data)}
         </div>
       );
 
@@ -71,13 +80,13 @@ function SectionRenderer({ section, data }) {
     case "Experience":
       return (
         <div className="mb-4">
-          <h2 className="text-xl font-semibold mb-1 border-b">Experience</h2>
+          <h2 className={`text-xl font-light mb-1 border-b ${sectionStyle.Experience}`}>
+            Experience
+          </h2>
           <p className="font-bold">
             {data.role} @ {data.company}
           </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            {data.duration}
-          </p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">{data.duration}</p>
           <p>{data.description}</p>
         </div>
       );
@@ -85,18 +94,20 @@ function SectionRenderer({ section, data }) {
     case "Projects":
       return (
         <div className="mb-4">
-          <h2 className="text-xl font-semibold mb-1 border-b">Projects</h2>
-          <p>{data.links}</p>
+          <h2 className={`text-xl font-light mb-1 border-b ${sectionStyle.Projects}`}>
+            Projects
+          </h2>
+          <p>{data.info}</p>
         </div>
       );
 
     case "Education":
       return (
         <div className="mb-4">
-          <h2 className="text-xl font-semibold mb-1 border-b">Education</h2>
-          <p>
-            {data.degree} - {data.institution}
-          </p>
+          <h2 className={`text-xl font-light mb-1 border-b ${sectionStyle.Education}`}>
+            Education
+          </h2>
+          <p>{data.degree} - {data.institution}</p>
           <p>{data.year}</p>
         </div>
       );
@@ -104,8 +115,10 @@ function SectionRenderer({ section, data }) {
     case "Achievements":
       return (
         <div className="mb-4">
-          <h2 className="text-xl font-semibold mb-1 border-b">Achievements</h2>
-          <p>{data.list}</p>
+          <h2 className={`text-xl font-light mb-1 border-b ${sectionStyle.Achievements}`}>
+            Achievements
+          </h2>
+          <p>{data.details}</p>
         </div>
       );
 

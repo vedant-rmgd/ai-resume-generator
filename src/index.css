@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+body {
+    font-family: "Bungee", 'cursive';
+    /* overflow: hidden; */
+}
