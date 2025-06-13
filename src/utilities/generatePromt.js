@@ -1,5 +1,5 @@
 export default function generatePrompt(formData, selectedSections) {
-  let prompt = `You are a professional resume builder. Based on the following user input, write a clean, concise and impactful resume section(s):\n\n`;
+  let prompt = `You are a professional resume builder. Based on the following user input, write a clean, concise and impactful without including any hyperlinks, email or note in summary section in detailed paragraph and dont add any warnings or notes in any sections resume section(s):\n\n`;
 
   selectedSections.forEach((section) => {
     const data = formData[section];

@@ -22,22 +22,24 @@ export async function generateResumeFromGemini(prompt) {
     if (!res.ok) throw new Error(data.error.message);
 
     let rawText = data.candidates[0].content.parts[0].text.trim();
+    return rawText;
 
-    // Clean up hallucinated or placeholder content
-    const cleanedText = rawText
-      .replace(/\[Phone Number\]/gi, "")
-      .replace(/\[Email Address\]/gi, "")
-      .replace(/^\s*\* /gm, "- ")                     
-      .replace(/^\s*Note:.*$/gim, "")                 
-      .replace(/^\s*[\*\-]\s*\[.*?\]/gm, "")           
-      .replace(/\n{3,}/g, "\n\n");                    
+    // const cleanedText = rawText
+    //   .replace(/\[Phone Number\]/gi, "")
+    //   .replace(/\[Email Address\]/gi, "")
+    //   .replace(/^\s*\* /gm, "- ") // replace bullet points
+    //   .replace(/^\s*Note:.*$/gim, "") // remove note lines
+    //   .replace(/^\s*[\*\-]\s*\[.*?\]/gm, "") // remove markdown links in bullets
+    //   .replace(/\n{3,}/g, "\n\n") // collapse multiple newlines
+    //   .replace(/https?:\/\/[^\s)]+/g, "") // remove all plain URLs
+    //   .replace(/LinkedIn:?.*?\n?/gi, "") // remove lines starting with LinkedIn
+    //   .replace(/GitHub:?.*?\n?/gi, "") // remove lines starting with GitHub
+    //   .replace(/Portfolio:?.*?\n?/gi, "") // remove Portfolio lines
+    //   .replace(/[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/g, ""); // remove emails
 
-    return cleanedText;
-
+    // return cleanedText;
   } catch (error) {
     console.error("Gemini Error:", error);
     return "⚠️ Gemini failed to generate resume. Try again.";
   }
 }
-
-
